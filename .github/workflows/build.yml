@@ -6,6 +6,11 @@ on:
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
+    inputs:
+      release:
+        description: "Publish a GitHub release (tag v<VERSION>) with the built files"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -55,15 +60,23 @@ jobs:
 
   release:
     name: GitHub release
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || inputs.release
     needs: [windows, mac]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Tag name
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then echo "TAG=$GITHUB_REF_NAME" >> "$GITHUB_ENV"
+          else echo "TAG=v$(cat VERSION)" >> "$GITHUB_ENV"; fi
       - uses: actions/download-artifact@v4
         with:
           path: dist
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ env.TAG }}
+          target_commitish: ${{ github.sha }}
+          name: Splat QuickLook ${{ env.TAG }}
           files: dist/*
           generate_release_notes: true
