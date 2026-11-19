@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Splat Viewer</string>
+	<string>QuickSplat</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -18,23 +18,23 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.polygon-file-format</string>
-				<string>it.gabriverga.splat.spz</string>
-				<string>it.gabriverga.splat.splat</string>
-				<string>it.gabriverga.splat.ksplat</string>
-				<string>it.gabriverga.splat.sog</string>
+				<string>it.gabriverga.quicksplat.spz</string>
+				<string>it.gabriverga.quicksplat.splat</string>
+				<string>it.gabriverga.quicksplat.ksplat</string>
+				<string>it.gabriverga.quicksplat.sog</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>SplatViewer</string>
+	<string>QuickSplat</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>it.gabriverga.SplatViewer</string>
+	<string>it.gabriverga.QuickSplat</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Splat Viewer</string>
+	<string>QuickSplat</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -82,7 +82,7 @@
 			<key>UTTypeDescription</key>
 			<string>SPZ Gaussian splat</string>
 			<key>UTTypeIdentifier</key>
-			<string>it.gabriverga.splat.spz</string>
+			<string>it.gabriverga.quicksplat.spz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -100,7 +100,7 @@
 			<key>UTTypeDescription</key>
 			<string>Gaussian splat</string>
 			<key>UTTypeIdentifier</key>
-			<string>it.gabriverga.splat.splat</string>
+			<string>it.gabriverga.quicksplat.splat</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -118,7 +118,7 @@
 			<key>UTTypeDescription</key>
 			<string>KSPLAT Gaussian splat</string>
 			<key>UTTypeIdentifier</key>
-			<string>it.gabriverga.splat.ksplat</string>
+			<string>it.gabriverga.quicksplat.ksplat</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -136,7 +136,7 @@
 			<key>UTTypeDescription</key>
 			<string>SOG Gaussian splat</string>
 			<key>UTTypeIdentifier</key>
-			<string>it.gabriverga.splat.sog</string>
+			<string>it.gabriverga.quicksplat.sog</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -5,15 +5,15 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Splat Viewer</string>
+	<string>QuickSplat</string>
 	<key>CFBundleExecutable</key>
-	<string>SplatPreview</string>
+	<string>QuickSplatPreview</string>
 	<key>CFBundleIdentifier</key>
-	<string>it.gabriverga.SplatViewer.Preview</string>
+	<string>it.gabriverga.QuickSplat.Preview</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Splat Viewer</string>
+	<string>QuickSplat</string>
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
@@ -31,10 +31,10 @@
 			<key>QLSupportedContentTypes</key>
 			<array>
 				<string>public.polygon-file-format</string>
-				<string>it.gabriverga.splat.spz</string>
-				<string>it.gabriverga.splat.splat</string>
-				<string>it.gabriverga.splat.ksplat</string>
-				<string>it.gabriverga.splat.sog</string>
+				<string>it.gabriverga.quicksplat.spz</string>
+				<string>it.gabriverga.quicksplat.splat</string>
+				<string>it.gabriverga.quicksplat.ksplat</string>
+				<string>it.gabriverga.quicksplat.sog</string>
 			</array>
 			<key>QLSupportsSearchableItems</key>
 			<false/>

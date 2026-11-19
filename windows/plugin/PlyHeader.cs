@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace QuickLook.Plugin.SplatViewer
+namespace QuickLook.Plugin.QuickSplat
 {
     internal enum PlyKind { Unknown, Splat, Points, Mesh }
 

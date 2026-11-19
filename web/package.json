@@ -2,7 +2,7 @@
   "name": "quicksplat-web",
   "version": "0.3.0",
   "private": true,
-  "description": "Web viewer embedded in the QuickLook Splat Viewer plugin",
+  "description": "Web viewer embedded in the QuickLook QuickSplat plugin",
   "license": "GPL-3.0-only",
   "scripts": {
     "build": "mkdir -p dist && cp src/index.html dist/ && esbuild src/main.js --bundle --minify --format=iife --target=es2020 --outfile=dist/viewer.js --log-level=warning"

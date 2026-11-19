@@ -34,7 +34,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: windows/build/QuickLook.Plugin.SplatViewer.qlplugin
+          path: windows/build/QuickLook.Plugin.QuickSplat.qlplugin
 
   mac:
     name: macOS app (.zip)
@@ -55,7 +55,7 @@ jobs:
         with:
           name: mac
           path: |
-            mac/build/SplatViewer-mac.zip
+            mac/build/QuickSplat-mac.zip
             mac/build/install-mac.sh
 
   release:

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 
-namespace QuickLook.Plugin.SplatViewer
+namespace QuickLook.Plugin.QuickSplat
 {
     public sealed class Plugin : IViewer
     {
@@ -68,7 +68,7 @@ namespace QuickLook.Plugin.SplatViewer
             {
                 var udf = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "QuickLook.Plugin.SplatViewer", "WebView2");
+                    "QuickLook.Plugin.QuickSplat", "WebView2");
 
                 _host = WebView2Host.GetShared(udf, webDir);
                 context.ViewerContent = _host.Control;

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds "Splat Viewer.app" (viewer app + Quick Look extension) WITHOUT an Xcode project:
+# Builds "QuickSplat.app" (viewer app + Quick Look extension) WITHOUT an Xcode project:
 # plain swiftc, universal binary (Apple Silicon + Intel), ad-hoc signature.
 # Runs on macOS with the Xcode command line tools (GitHub Actions macOS runners have them).
 set -euo pipefail
@@ -10,10 +10,10 @@ ROOT=$(cd .. && pwd)
 VERSION=${VERSION:-$(cat "$ROOT/VERSION" 2>/dev/null || echo 0.0.0)}
 MIN_OS=13.0
 OUT="$MAC_DIR/build"
-APP="$OUT/Splat Viewer.app"
-APPEX="$APP/Contents/PlugIns/SplatPreview.appex"
+APP="$OUT/QuickSplat.app"
+APPEX="$APP/Contents/PlugIns/QuickSplatPreview.appex"
 
-echo "==> Splat Viewer for macOS $VERSION"
+echo "==> QuickSplat for macOS $VERSION"
 rm -rf "$OUT"
 mkdir -p "$OUT/obj" "$APP/Contents/MacOS" "$APP/Contents/Resources/web" \
          "$APPEX/Contents/MacOS" "$APPEX/Contents/Resources/web"
@@ -30,19 +30,19 @@ xcrun --sdk macosx swiftc --version
 for ARCH in arm64 x86_64; do
   TARGET="$ARCH-apple-macos$MIN_OS"
   echo "==> app ($ARCH)"
-  "${SWIFTC[@]}" -target "$TARGET" -module-name SplatViewer \
+  "${SWIFTC[@]}" -target "$TARGET" -module-name QuickSplat \
     Sources/Shared/*.swift Sources/App/*.swift \
-    -o "$OUT/obj/SplatViewer-$ARCH"
+    -o "$OUT/obj/QuickSplat-$ARCH"
 
   echo "==> Quick Look extension ($ARCH)"
-  "${SWIFTC[@]}" -target "$TARGET" -module-name SplatPreview -application-extension \
+  "${SWIFTC[@]}" -target "$TARGET" -module-name QuickSplatPreview -application-extension \
     Sources/Shared/*.swift Sources/Preview/*.swift \
     -Xlinker -e -Xlinker _NSExtensionMain -Xlinker -application_extension \
-    -o "$OUT/obj/SplatPreview-$ARCH"
+    -o "$OUT/obj/QuickSplatPreview-$ARCH"
 done
 
-lipo -create "$OUT/obj/SplatViewer-arm64" "$OUT/obj/SplatViewer-x86_64" -output "$APP/Contents/MacOS/SplatViewer"
-lipo -create "$OUT/obj/SplatPreview-arm64" "$OUT/obj/SplatPreview-x86_64" -output "$APPEX/Contents/MacOS/SplatPreview"
+lipo -create "$OUT/obj/QuickSplat-arm64" "$OUT/obj/QuickSplat-x86_64" -output "$APP/Contents/MacOS/QuickSplat"
+lipo -create "$OUT/obj/QuickSplatPreview-arm64" "$OUT/obj/QuickSplatPreview-x86_64" -output "$APPEX/Contents/MacOS/QuickSplatPreview"
 
 # 3) bundle resources
 echo "==> bundle"
@@ -73,6 +73,6 @@ codesign -d --entitlements - "$APPEX" 2>/dev/null | head -20 || true
 
 # 5) zip for distribution (ditto keeps bundle metadata intact)
 echo "==> package"
-(cd "$OUT" && ditto -c -k --sequesterRsrc --keepParent "Splat Viewer.app" "SplatViewer-mac.zip")
+(cd "$OUT" && ditto -c -k --sequesterRsrc --keepParent "QuickSplat.app" "QuickSplat-mac.zip")
 ls -la "$OUT"
-echo "OK -> $OUT/SplatViewer-mac.zip"
+echo "OK -> $OUT/QuickSplat-mac.zip"

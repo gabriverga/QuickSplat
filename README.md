@@ -30,7 +30,7 @@ On Windows, `.ply` meshes are left to QuickLook's built-in 3D viewer; on macOS t
 ### Windows
 
 1. Install [QuickLook](https://github.com/QL-Win/QuickLook) (Microsoft Store or GitHub).
-2. Download `QuickLook.Plugin.SplatViewer.qlplugin` from the [latest release](../../releases/latest).
+2. Download `QuickLook.Plugin.QuickSplat.qlplugin` from the [latest release](../../releases/latest).
 3. Select it in Explorer, press **Space**, click **Install**, then restart QuickLook.
 
 Requires the Microsoft Edge WebView2 Runtime (preinstalled on Windows 10/11).
@@ -43,16 +43,16 @@ Paste this in **Terminal**:
 curl -fsSL https://github.com/gabriverga/QuickSplat/releases/latest/download/install-mac.sh | bash
 ```
 
-It downloads the app, puts **Splat Viewer** in Applications and enables the Quick Look extension. Then select a splat in Finder and press **Space**.
+It downloads the app, puts **QuickSplat** in Applications and enables the Quick Look extension. Then select a splat in Finder and press **Space**.
 
-Prefer to download first? Get `SplatViewer-mac.zip` and `install-mac.sh` from the [latest release](../../releases/latest) and run `bash ~/Downloads/install-mac.sh`.
+Prefer to download first? Get `QuickSplat-mac.zip` and `install-mac.sh` from the [latest release](../../releases/latest) and run `bash ~/Downloads/install-mac.sh`.
 
 <details>
 <summary>Manual install</summary>
 
-1. Download `SplatViewer-mac.zip` from the [latest release](../../releases/latest), unzip it, move **Splat Viewer** to Applications.
+1. Download `QuickSplat-mac.zip` from the [latest release](../../releases/latest), unzip it, move **QuickSplat** to Applications.
 2. Open it. macOS will block it because the app isn't notarized by Apple: go to **System Settings › Privacy & Security**, click **Open Anyway** (within an hour of the first attempt).
-3. If Space shows nothing, enable **Splat Viewer** in **System Settings › General › Login Items & Extensions › Quick Look**.
+3. If Space shows nothing, enable **QuickSplat** in **System Settings › General › Login Items & Extensions › Quick Look**.
 
 </details>
 
@@ -72,8 +72,8 @@ Only the PLY header is read up front (a few KB) to tell splats, point clouds and
 Everything builds from the command line, no Visual Studio or Xcode projects. GitHub Actions builds both on every push and attaches them to a release when you push a `v*` tag.
 
 ```bash
-./windows/build.sh   # Linux/macOS: Node.js, .NET SDK, git, zip  -> windows/build/QuickLook.Plugin.SplatViewer.qlplugin
-./mac/build.sh       # macOS: Node.js, Xcode command line tools   -> mac/build/SplatViewer-mac.zip
+./windows/build.sh   # Linux/macOS: Node.js, .NET SDK, git, zip  -> windows/build/QuickLook.Plugin.QuickSplat.qlplugin
+./mac/build.sh       # macOS: Node.js, Xcode command line tools   -> mac/build/QuickSplat-mac.zip
 ```
 
 `tools/` has scripts that generate synthetic test files (a 3DGS PLY and a point cloud).

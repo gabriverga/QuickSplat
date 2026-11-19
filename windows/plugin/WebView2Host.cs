@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace QuickLook.Plugin.SplatViewer
+namespace QuickLook.Plugin.QuickSplat
 {
     /// <summary>
     /// One WebView2 + viewer page shared by all previews: it's created on the first preview and then

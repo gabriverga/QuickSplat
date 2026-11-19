@@ -4,17 +4,17 @@
 # Prints diagnostics; exits non-zero only if the bundle itself is broken.
 set -uo pipefail
 cd "$(dirname "$0")" || exit 1
-APP="build/Splat Viewer.app"
-APPEX="$APP/Contents/PlugIns/SplatPreview.appex"
-ID=it.gabriverga.SplatViewer.Preview
+APP="build/QuickSplat.app"
+APPEX="$APP/Contents/PlugIns/QuickSplatPreview.appex"
+ID=it.gabriverga.QuickSplat.Preview
 
 echo "==> architectures"
-lipo -info "$APP/Contents/MacOS/SplatViewer" || exit 1
-lipo -info "$APPEX/Contents/MacOS/SplatPreview" || exit 1
+lipo -info "$APP/Contents/MacOS/QuickSplat" || exit 1
+lipo -info "$APPEX/Contents/MacOS/QuickSplatPreview" || exit 1
 
 echo "==> entry point / linked frameworks of the extension"
-otool -L "$APPEX/Contents/MacOS/SplatPreview" | grep -E "QuickLookUI|WebKit|AppKit" || exit 1
-nm -u "$APPEX/Contents/MacOS/SplatPreview" | grep -q _NSExtensionMain && echo "_NSExtensionMain: ok" || { echo "missing _NSExtensionMain"; exit 1; }
+otool -L "$APPEX/Contents/MacOS/QuickSplatPreview" | grep -E "QuickLookUI|WebKit|AppKit" || exit 1
+nm -u "$APPEX/Contents/MacOS/QuickSplatPreview" | grep -q _NSExtensionMain && echo "_NSExtensionMain: ok" || { echo "missing _NSExtensionMain"; exit 1; }
 
 echo "==> signature"
 codesign --verify --strict --verbose=2 "$APP" || exit 1
@@ -23,9 +23,9 @@ codesign -d --entitlements - "$APPEX" 2>&1 | grep -q app-sandbox && echo "sandbo
 echo "==> registration (informational)"
 DEST=$(mktemp -d)/Applications
 mkdir -p "$DEST"
-ditto "$APP" "$DEST/Splat Viewer.app"
-/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$DEST/Splat Viewer.app" || true
-pluginkit -a "$DEST/Splat Viewer.app/Contents/PlugIns/SplatPreview.appex" || true
+ditto "$APP" "$DEST/QuickSplat.app"
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$DEST/QuickSplat.app" || true
+pluginkit -a "$DEST/QuickSplat.app/Contents/PlugIns/QuickSplatPreview.appex" || true
 sleep 2
 pluginkit -e use -i "$ID" || true
 pluginkit -mAvvv -i "$ID" || true

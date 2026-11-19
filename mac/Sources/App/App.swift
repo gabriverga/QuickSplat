@@ -2,7 +2,7 @@ import AppKit
 import UniformTypeIdentifiers
 
 @main
-enum SplatViewerApp {
+enum QuickSplatApp {
     @MainActor
     static func main() {
         let app = NSApplication.shared
@@ -16,7 +16,7 @@ enum SplatViewerApp {
 }
 
 final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
-    static let previewExtensionID = "it.gabriverga.SplatViewer.Preview"
+    static let previewExtensionID = "it.gabriverga.QuickSplat.Preview"
 
     private var viewerWindows: [NSWindow] = []
     private var welcomeWindow: NSWindow?
@@ -71,7 +71,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         window.isReleasedWhenClosed = false
         window.contentView = view
         window.delegate = self
-        window.setFrameAutosaveName("SplatViewerWindow")
+        window.setFrameAutosaveName("QuickSplatWindow")
         if viewerWindows.isEmpty { window.center() } else if let last = viewerWindows.last {
             window.setFrameTopLeftPoint(NSPoint(x: last.frame.minX + 24, y: last.frame.maxY - 24))
         }
@@ -114,7 +114,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered,
             defer: false)
-        window.title = "Splat Viewer"
+        window.title = "QuickSplat"
         window.isReleasedWhenClosed = false
         window.delegate = self
 
@@ -124,13 +124,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             for url in urls { self?.openViewer(url) }
         }
 
-        let title = NSTextField(labelWithString: "Splat Viewer")
+        let title = NSTextField(labelWithString: "QuickSplat")
         title.font = NSFont.systemFont(ofSize: 22, weight: .semibold)
 
         let body = NSTextField(wrappingLabelWithString:
             "Quick Look is installed: select a .ply, .spz, .splat, .ksplat or .sog file in Finder and press Space.\n\n" +
             "Drop a file here (or use Open…) to view it in a window.\n\n" +
-            "If Space shows nothing, enable \u{201C}Splat Viewer\u{201D} under System Settings \u{203A} General \u{203A} " +
+            "If Space shows nothing, enable \u{201C}QuickSplat\u{201D} under System Settings \u{203A} General \u{203A} " +
             "Login Items & Extensions \u{203A} Quick Look.")
         body.textColor = .secondaryLabelColor
         body.preferredMaxLayoutWidth = 440
@@ -168,7 +168,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     /// this makes sure it is registered and enabled.
     private func registerQuickLookExtension() {
         guard let plugins = Bundle.main.builtInPlugInsURL else { return }
-        let appex = plugins.appendingPathComponent("SplatPreview.appex").path
+        let appex = plugins.appendingPathComponent("QuickSplatPreview.appex").path
         let extensionID = AppDelegate.previewExtensionID
         DispatchQueue.global(qos: .utility).async {
             AppDelegate.run("/usr/bin/pluginkit", ["-a", appex])
@@ -186,7 +186,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             try p.run()
             p.waitUntilExit()
         } catch {
-            NSLog("SplatViewer: failed to run \(path): \(error)")
+            NSLog("QuickSplat: failed to run \(path): \(error)")
         }
     }
 
@@ -197,12 +197,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
         let appItem = NSMenuItem()
         let appMenu = NSMenu()
-        appMenu.addItem(withTitle: "About Splat Viewer", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        appMenu.addItem(withTitle: "About QuickSplat", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
         appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Quick Look Settings\u{2026}", action: #selector(openExtensionSettings(_:)), keyEquivalent: "")
         appMenu.addItem(.separator())
-        appMenu.addItem(withTitle: "Hide Splat Viewer", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
-        appMenu.addItem(withTitle: "Quit Splat Viewer", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenu.addItem(withTitle: "Hide QuickSplat", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        appMenu.addItem(withTitle: "Quit QuickSplat", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         appItem.submenu = appMenu
         main.addItem(appItem)
 
