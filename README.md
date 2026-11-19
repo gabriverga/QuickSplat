@@ -5,7 +5,7 @@ Press **Space** on a Gaussian splat or a point cloud and see it in 3D, the way y
 - **Windows**: plugin for [QuickLook](https://github.com/QL-Win/QuickLook)
 - **macOS**: app with a native Quick Look extension (Space in Finder) and a standalone viewer
 
-![Gaussian splat preview](docs/splat.png)
+![QuickSplat previewing a Gaussian splat with Space in macOS Finder](docs/quicksplat-macos.png)
 
 ## Supported files
 
