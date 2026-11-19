@@ -1,0 +1,69 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Windows plugin (.qlplugin)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+      - run: ./windows/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: windows/build/QuickLook.Plugin.SplatViewer.qlplugin
+
+  mac:
+    name: macOS app (.zip)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Version from tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+      - run: ./mac/build.sh
+      - run: ./mac/check.sh
+      - name: Installer script
+        run: sed "s#__REPO__#${{ github.repository }}#g" mac/install-mac.sh > mac/build/install-mac.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mac
+          path: |
+            mac/build/SplatViewer-mac.zip
+            mac/build/install-mac.sh
+
+  release:
+    name: GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [windows, mac]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true

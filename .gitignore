@@ -1,0 +1,7 @@
+node_modules/
+web/dist/
+windows/build/
+mac/build/
+.cache/
+.DS_Store
+*.qlplugin

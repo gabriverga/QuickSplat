@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<title>Splat Preview</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1e1e1e; color: #ddd;
+    font: 12px/1.4 "Segoe UI", system-ui, sans-serif; user-select: none; }
+  canvas { display: block; outline: none; }
+
+  #info { position: fixed; left: 8px; top: 8px; max-width: min(380px, 60vw); display: none;
+    background: rgba(18,18,18,.66); border: 1px solid rgba(255,255,255,.08); border-radius: 6px;
+    padding: 5px 8px; font-size: 11px; line-height: 1.45; color: #bbb; cursor: pointer;
+    backdrop-filter: blur(4px); }
+  #info .t { color: #eee; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #info .k { color: #777; }
+  #info div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #info.min div:not(.t) { display: none; }
+
+  #hud { position: fixed; left: 8px; bottom: 8px; display: flex; gap: 6px; align-items: center;
+    background: rgba(18,18,18,.66); border: 1px solid rgba(255,255,255,.08); border-radius: 6px; padding: 4px 6px;
+    opacity: .4; transition: opacity .2s; }
+  #hud:hover { opacity: 1; }
+  button { background: #2d2d2d; color: #ddd; border: 1px solid #444; border-radius: 4px; padding: 2px 8px;
+    font: inherit; cursor: pointer; }
+  button:hover { background: #3a3a3a; }
+  button.on { background: #3b5f8f; border-color: #4f7ab3; }
+  #psWrap { display: none; align-items: center; gap: 4px; color: #999; }
+  #psWrap input { width: 70px; }
+
+  #barwrap { position: fixed; left: 50%; top: 50%; width: 260px; height: 4px; margin-left: -130px;
+    background: #333; border-radius: 2px; overflow: hidden; display: none; }
+  #bar { height: 100%; width: 0; background: #6aa0e8; transition: width .1s; }
+  #msg { position: fixed; left: 50%; top: calc(50% + 14px); transform: translateX(-50%); color: #aaa; display: none; }
+  #msg.err { color: #ff8a80; top: 50%; max-width: 80vw; text-align: center; }
+  #help { position: fixed; right: 8px; bottom: 8px; color: #666; font-size: 11px; text-align: right; }
+</style>
+</head>
+<body>
+<div id="barwrap"><div id="bar"></div></div>
+<div id="msg"></div>
+<div id="info" title=""></div>
+<div id="hud">
+  <button id="btnReset" title="Reframe (R)">Reset view</button>
+  <button id="btnAxis" title="Change up axis (U)">Up: Y-down</button>
+  <button id="btnRotate" title="Auto-rotate (A)">Auto-rotate</button>
+  <span id="psWrap">Point size <input id="pointSize" type="range" min="1" max="8" step="0.5"></span>
+</div>
+<div id="help">Left: orbit · Right: pan · Wheel: zoom · Double-click: set pivot · I: info</div>
+<script src="viewer.js"></script>
+</body>
+</html>
