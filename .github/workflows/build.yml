@@ -77,6 +77,6 @@ jobs:
         with:
           tag_name: ${{ env.TAG }}
           target_commitish: ${{ github.sha }}
-          name: Splat QuickLook ${{ env.TAG }}
+          name: QuickSplat ${{ env.TAG }}
           files: dist/*
           generate_release_notes: true

@@ -1,4 +1,4 @@
-# Splat QuickLook
+# QuickSplat
 
 Press **Space** on a Gaussian splat or a point cloud and see it in 3D, the way you preview an image. No need to open Postshot, SuperSplat, Blender or CloudCompare just to check a file.
 
@@ -40,7 +40,7 @@ Requires the Microsoft Edge WebView2 Runtime (preinstalled on Windows 10/11).
 Paste this in **Terminal**:
 
 ```bash
-curl -fsSL https://github.com/gabriverga/splat-quicklook/releases/latest/download/install-mac.sh | bash
+curl -fsSL https://github.com/gabriverga/QuickSplat/releases/latest/download/install-mac.sh | bash
 ```
 
 It downloads the app, puts **Splat Viewer** in Applications and enables the Quick Look extension. Then select a splat in Finder and press **Space**.

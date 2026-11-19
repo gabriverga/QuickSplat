@@ -1,5 +1,5 @@
 {
-  "name": "quicklook-splat-viewer-web",
+  "name": "quicksplat-web",
   "version": "0.3.0",
   "private": true,
   "description": "Web viewer embedded in the QuickLook Splat Viewer plugin",
